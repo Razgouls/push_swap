@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_checker.c                                       :+:      :+:    :+:   */
+/*   ft_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 18:58:14 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/16 19:50:53 by eoliveir         ###   ########.fr       */
+/*   Created: 2021/03/16 19:23:51 by eoliveir          #+#    #+#             */
+/*   Updated: 2021/03/16 20:13:22 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker.h"
 
-void			ft_init_data(t_data *d)
+int				ft_check_number(char *str)
 {
-	d->len_a = 0;
-	d->len_b = 0;
-	d->a = NULL;
-	d->b = NULL;
+	if (str[0] <= '2' && str[1] <= '1' && str[2] <= '4' && str[3] <= '7' &&
+		str[4] <= '4' && str[5] <= '8' && str[6] <= '3' && str[7] <= '6' &&
+		str[8] <= '4' && str[9] <= '7')
+		return (0);
+	return (-1);
 }
 
-int				main(int argc, char **argv)
+void			ft_memdel(void *ptr)
 {
-	t_data		d;
-
-	ft_init_data(&d);
-	if (argc < 2)
-		return (0);
-	if (ft_fill_stack(argv + 1, &d) == -1)
+	if (ptr)
 	{
-		write(2, "Error\n", 6);
-		ft_free_list(&d.a);
+		free(ptr);
+		ptr = NULL;
 	}
-	ft_print_stack(d.a);
-	return (0);
 }

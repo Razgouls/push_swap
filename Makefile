@@ -1,95 +1,49 @@
-GREEN = \033[01;32m
-YELLOW = \033[01;33m
-CYAN = \033[01;36m
-RESET = \033[00m
-RED = \033[0;31m
+NAME			= checker
 
-NAME = checker
+SRCS_LIST 		= checker/ft_checker.c				\
+					checker/ft_fill_stack.c		\
+					utils/ft_debug.c				\
+					utils/ft_list.c				\
+					utils/ft_utils.c				\
 
-CC = clang 
+GREEN   		= \e[32m
+RESET   		= \e[39m
 
-FLAGS = -g3 -Wall -Wextra -Werror
+SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
-LIBFT_DIR = libft
-LIBFT = $(LIBFT_DIR)/libft.a
+OBJS			= ${SRCS:.c=.o}
 
-INC= -I./includes
+HEADER			= includes
+FOLDER			= srcs
+LIBFT 			= libft
 
-#############################################
-######			FILES .C			#########
-#############################################
+CC				= clang
+CFLAGS 			= -Wall -Wextra -Werror
+LFLAGS			= -L libft -lft
+MLX_DIR			= minilibx-linux
 
-SRC = srcs
+RM				= rm -f
 
-DIR_C = $(addprefix $(SRC)/, checker)
+all:			$(NAME)
 
-FILES_C = $(addprefix $(SRC)/, $(BUILTINS))
-BONUS_C = $(addprefix $(SRC)/, $(BUILTINS))
+$(NAME):		$(OBJS)
+				@echo "$(GREEN) -----> COMPILATION LIBFT <----- $(RESET)"
+				@make -C $(LIBFT)
+				@${CC} $(CFLAGS) $(LFLAGS) -o $(NAME) $(OBJS) libft/libft.a
 
-BUILTINS = $(addprefix checker/,	\
-			ft_checker.c)
-
-#OTHERS = ft_lst_history.c			
-
-#############################################
-######			FILES .O			#########
-#############################################
-
-OBJ_DIR = objs
-O_DIR = $(DIR_C:$(SRC)/%=$(OBJ_DIR)/%)
-OBJS = $(FILES_C:$(SRC)/%.c=$(OBJ_DIR)/%.o)
-
-OBJS_BONUS = $(BONUS_C:$(SRC)/%.c=$(OBJ_DIR)/%.o)
-#############################################
-######			FILES .O			#########
-#############################################
-
-#@printf "$(YELLOW)Compiling Object...$(RESET) %33.33s        \r" "$@"
-
-all: $(NAME)
-
-$(LIBFT) :
-	@echo "\n$(YELLOW)Compiling libft..."
-	@make -s -C $(LIBFT_DIR)
-
-$(NAME): $(LIBFT) $(OBJS) 
-	@printf "$(YELLOW)Compiling Object...$(RESET)                                                       "
-	@printf "\n$(GREEN)-->[OK]                       $(RESET)"
-	@printf "\n$(CYAN)Compiling $@..."
-	-@$(CC) $(FLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME) -ltermcap
-	@echo "\n$(GREEN)-->[OK]$(RESET)"
-
-$(OBJ_DIR)/%.o: $(SRC)/%.c
-	@mkdir -p objs/ $(O_DIR)
-	@printf "$(YELLOW)Compiling Object...$(RESET) %33.33s										\r" "$@"
-	@$(CC) $(FLAGS) -o $@ -c $< $(INCL)
-
-bonus : $(NAME_BONUS)
-
-$(NAME_BONUS): $(LIBFT) $(OBJS_BONUS) 
-	@printf "$(YELLOW)Compiling Object...$(RESET)                                                       "
-	@printf "\n$(GREEN)-->[OK]                       $(RESET)"
-	@printf "\n$(CYAN)Compiling $@..."
-	-@$(CC) $(FLAGS) $(INC) $(OBJS_BONUS) $(LIBFT) -o $(NAME_BONUS) -ltermcap
-	@echo "\n$(GREEN)-->[OK]$(RESET)"
+%.o: %.c
+				-@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
+				@echo "$(GREEN) [OK] : $(RESET) $<"
 
 clean:
-	@echo " $(RED)__Clean__"
-	@echo "$(RESET)|  libft  |"
-	make -s clean -C ./libft
-	@echo "|  OBJS   |"
-	@rm -rf $(OBJ_DIR)
-	@echo "$(GREEN)__Cleaned__$(RESET)"
+				@echo "$(GREEN) -----> CLEAR OK <----- $(RESET)"
+				@$(RM) $(OBJS)
 
-fclean: clean
-	@make -s fclean -C ./libft
-	@echo
-	@rm -f $(NAME) $(NAME_BONUS)
-	@echo "$(RED)$(NAME) removed$(RESET)"
-	@echo "------------------------------"
+fclean:			clean
+				@echo "$(GREEN) -----> COMPILATION FCLEAN OK <----- $(RESET)"
+				@$(RM) $(NAME)
+				@make fclean -C $(LIBFT)
 
-re: fclean all
+re:				fclean all
 
-.SILENT: clean
-
-.PHONY: all clean fclean re start
+.PHONY: 		all fclean clean re
