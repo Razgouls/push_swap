@@ -6,33 +6,37 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 08:38:04 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 10:06:38 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/17 14:25:54 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker.h"
 
-void			ft_sa(t_data *d, t_stack **a)
+void			ft_sa(t_data *d)
 {
 	t_stack		*tmp;
 
 	if (d->len_a < 2)
 		return ;
-	tmp = (*a)->next;
-	(*a)->next = (*a)->next->next;
-	*a = tmp;
-	(*a)->next = tmp->prev;
+	tmp = (d->a)->next;
+	tmp->prev->next = tmp->next;
+	if (tmp->next)
+		tmp->next->prev = tmp->prev;
+	tmp->next = d->a;
+	tmp->prev->prev = tmp;
+	tmp->prev = NULL;
+	d->a = tmp;
 }
 
-void			ft_pa(t_data *d, t_stack **a, t_stack **b)
+void			ft_pa(t_data *d)
 {
 	t_stack		*tmp;
 
 	if (d->len_b < 1)
 		return ;
-	tmp = *a;
-	ft_add_front_list(d, 0, a, (*b)->nbr);
-	ft_delete_elem_first(d, b, 1);
+	tmp = d->a;
+	ft_add_front_list(d, 0, &d->a, d->b->nbr);
+	ft_delete_elem_first(d, &d->b, 1);
 }
 
 void			ft_ra(t_data *d, int id, t_stack **s)
@@ -45,12 +49,14 @@ void			ft_ra(t_data *d, int id, t_stack **s)
 	if (id == 1 && d->len_b < 2)
 		return ;
 	tmp = *s;
+	(*s)->next->prev = NULL;
 	current = *s;
 	while (current->next)
 		current = current->next;
 	current->next = tmp;
-	*s = tmp->next;
-	tmp->next = NULL;
+	*s = (*s)->next;
+	current->next->next = NULL;
+	current->next->prev = current;
 }
 
 void			ft_rra(t_data *d, int id, t_stack **s)
@@ -58,7 +64,6 @@ void			ft_rra(t_data *d, int id, t_stack **s)
 	t_stack		*tmp;
 	t_stack		*current;
 
-	ft_print_stack(*s);
 	if (id == 0 && d->len_a < 2)
 		return ;
 	if (id == 1 && d->len_b < 2)
@@ -67,7 +72,9 @@ void			ft_rra(t_data *d, int id, t_stack **s)
 	current = *s;
 	while (current->next)
 		current = current->next;
-	//current->prev->next = NULL;
-	//*s = current;
-	//(*s)->next = tmp;
+	current->prev->next = NULL;
+	current->prev = NULL;
+	current->next = tmp;
+	tmp->prev = current;
+	*s = current;
 }

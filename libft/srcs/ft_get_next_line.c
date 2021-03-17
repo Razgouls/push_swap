@@ -3,97 +3,100 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_next_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elieoliveira <marvin@42.fr>                +#+  +:+       +#+        */
+/*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/19 11:09:53 by elieolive         #+#    #+#             */
-/*   Updated: 2020/12/02 11:03:12 by elieolive        ###   ########.fr       */
+/*   Updated: 2021/03/17 14:39:41 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char		*save_rest(char *stock)
+char			*ft_concat(char *s1, char *s2, int len)
 {
-	int i;
+	char		*s3;
+	int			i;
+	int			j;
+	int			size_s1;
 
 	i = 0;
-	while (stock[i])
+	size_s1 = 0;
+	while ((j = -1) && s1 && s1[size_s1])
+		size_s1++;
+	if (!(s3 = malloc(sizeof(char) * (len + size_s1 + 1))))
+		return (0);
+	while (s1 && s1[i])
 	{
-		if (stock[i] == '\n')
-			return (stock + i);
-		else if (stock[i + 1] == '\0')
-			return (stock + i);
+		s3[i] = s1[i];
 		i++;
 	}
-	return (0);
+	while (s2 && ++j < len)
+	{
+		s3[i] = s2[j];
+		i++;
+	}
+	if (s1)
+		free(s1);
+	s3[i] = '\0';
+	return (s3);
 }
 
-static int		ft_check(char *stock)
+int				check_n(char *p)
 {
-	int	i;
+	int			i;
 
 	i = 0;
-	while (stock[i])
-	{
-		if (stock[i] == '\n')
-			return (1);
+	while (p[i] && p[i] != '\n')
 		i++;
-	}
-	return (0);
+	return (i);
 }
 
-static int		ft_check_line(char **stock, char **line, int res_read)
+int				handling_return(int r, char *buf, char **line, char *p)
 {
-	char	*tmp;
-	char	*tmp_bis;
-
-	if (res_read < 0)
-		return (-1);
-	if (*stock && (tmp = save_rest(*stock)))
+	if (r > 0)
 	{
-		if (tmp[0] == '\n' && tmp[1])
-		{
-			*line = ft_strndup(*stock, ft_strlen(*stock) - ft_strlen(tmp));
-			tmp_bis = ft_strndup(tmp + 1, ft_strlen(tmp + 1));
-			free(*stock);
-			*stock = tmp_bis;
-			return (1);
-		}
-		else
-			*line = ft_strndup(*stock, ft_strlen(*stock));
-		free(*stock);
-		*stock = NULL;
-		return (1);
+		buf[r] = '\0';
+		if (!(*line = ft_concat(p, buf, check_n(buf))))
+			return (-1);
+		return (r);
 	}
-	*line = 0;
-	return (0);
+	else if (r == 0)
+	{
+		if (!*line)
+			if (!(*line = ft_concat(0, 0, 0)))
+				return (-1);
+		if (*line[0])
+			return (1);
+		return (0);
+	}
+	*line = ft_concat(0, 0, 0);
+	return (-1);
 }
 
 int				ft_get_next_line(int fd, char **line)
 {
-	char			*buffer;
-	static char		*stock[256];
-	int				res_read;
-	char			*tmp_stock;
+	static char	buf[BUFFER_SIZE + 1];
+	static int	i = 0;
+	int			r;
+	char		*p;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || line == NULL ||
-		(!(buffer = malloc((BUFFER_SIZE + 1) * sizeof(char)))))
+	if (!line)
 		return (-1);
-	while ((res_read = read(fd, buffer, BUFFER_SIZE)) > 0)
+	p = 0;
+	*line = 0;
+	while (BUFFER_SIZE > 0)
 	{
-		buffer[res_read] = '\0';
-		if (!stock[fd])
-			stock[fd] = ft_strndup(buffer, ft_strlen(buffer));
-		else
-		{
-			tmp_stock = ft_strjoin(stock[fd], buffer);
-			free(stock[fd]);
-			stock[fd] = tmp_stock;
-		}
-		if (ft_check(stock[fd]))
-			break ;
+		if (i && !(*line = ft_concat(p, buf + i, check_n(buf + i))))
+			return (-1);
+		else if (!i && (r = read(fd, buf, BUFFER_SIZE)) >= -1)
+			if ((handling_return(r, buf, line, p)) <= 0)
+				return (r);
+		p = *line;
+		i += check_n(buf + i) + 1;
+		if (!buf[i - 1])
+			i = 0;
+		if (buf[i - 1] == '\n')
+			return (1);
 	}
-	free(buffer);
-	buffer = NULL;
-	return (ft_check_line(&stock[fd], line, res_read));
+	return (-1);
 }

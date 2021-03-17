@@ -6,6 +6,8 @@ SRCS_LIST 		= checker/ft_checker.c				\
 					utils/ft_list.c					\
 					utils/ft_utils.c				\
 					operandes/ft_operande_a.c		\
+					operandes/ft_operande_b.c		\
+					operandes/ft_operande_s.c		\
 
 GREEN   		= \e[32m
 RESET   		= \e[39m

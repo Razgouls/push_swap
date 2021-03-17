@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:03:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 09:41:54 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/17 14:35:28 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ int				ft_size_list(t_stack *stack)
 	return (cmp);
 }
 
+void			ft_modif_elem(t_stack *cur, t_stack *next, t_stack *prev)
+{
+	cur->prev = prev;
+	cur->next = next;
+}
+
 t_stack			*ft_new_elem(t_stack *next, t_stack *prev, int nbr)
 {
 	t_stack		*s;
@@ -53,12 +59,28 @@ t_stack			*ft_new_elem(t_stack *next, t_stack *prev, int nbr)
 	return (s);
 }
 
+int				ft_issorted(t_data *d, t_stack *a)
+{
+	if (d->len_a < 2)
+		return (0);
+	while (a->next)
+	{
+		if (a->nbr > a->next->nbr)
+			return (-1);
+		a = a->next;
+	}
+	return (0);
+}
+
 void			ft_add_front_list(t_data *d, int id, t_stack **s, int nbr)
 {
 	t_stack		*new;
 
-	if (*s && (*s)->next)
-		new = ft_new_elem((*s)->next, NULL, nbr);
+	if (*s)
+	{
+		new = ft_new_elem(*s, NULL, nbr);
+		(*s)->prev = new;
+	}
 	else
 		new = ft_new_elem(NULL, NULL, nbr);
 	*s = new;
@@ -86,16 +108,21 @@ void			ft_delete_elem_first(t_data *d, t_stack **s, int id)
 {
 	t_stack		*tmp;
 
-	ft_print_stack(*s);
-	if (*s)
+	if ((*s)->next)
 	{
 		tmp = *s;
-		*s = tmp->next;
+		if (tmp->next)
+			*s = tmp->next;
+		else
+			(*s) = NULL;
+		(*s)->prev = NULL;
 		ft_memdel(tmp);
 		ft_setup_len(d, id, '-');
-		if (id == 0)
-			ft_setup_len(d, 1, '+');
-		else
-			ft_setup_len(d, 0, '+');
+	}
+	else
+	{
+		ft_memdel(*s);
+		*s = NULL;
+		ft_setup_len(d, id, '-');
 	}
 }
