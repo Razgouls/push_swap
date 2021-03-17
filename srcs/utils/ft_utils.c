@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:23:51 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/16 20:13:22 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/17 09:10:56 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,23 @@ void			ft_memdel(void *ptr)
 	{
 		free(ptr);
 		ptr = NULL;
+	}
+}
+
+void			ft_setup_len(t_data *d, int id, char op)
+{
+	if (op == '+')
+	{
+		if (id == 0)
+			d->len_a++;
+		else
+			d->len_b++;
+	}
+	else if (op == '-')
+	{
+		if (id == 0)
+			d->len_a--;
+		else
+			d->len_b--;
 	}
 }

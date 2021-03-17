@@ -1,10 +1,11 @@
 NAME			= checker
 
 SRCS_LIST 		= checker/ft_checker.c				\
-					checker/ft_fill_stack.c		\
+					checker/ft_fill_stack.c			\
 					utils/ft_debug.c				\
-					utils/ft_list.c				\
+					utils/ft_list.c					\
 					utils/ft_utils.c				\
+					operandes/ft_operande_a.c		\
 
 GREEN   		= \e[32m
 RESET   		= \e[39m

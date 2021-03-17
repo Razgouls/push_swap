@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:02 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/16 20:15:02 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/17 09:14:40 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int			ft_fill_stack(char **argv, t_data *d)
 			return (-1);
 		if (ft_is_not_integer(argv[i]) == -1)
 			return (-1);
-		ft_add_back_list(&a, nbr);
+		ft_add_back_list(d, 1, &a, nbr);
 		i++;
 	}
-	d->a = a;
+	d->b = a;
 	return (0);
 }
