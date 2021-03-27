@@ -24,9 +24,6 @@ SRCS			=	ft_convert_hexa.c \
 					ft_printf_utils.c \
 					ft_printf_c.c
 
-GREEN   		= \e[32m
-RESET   		= \e[39m
-
 OBJS			= ${SRCS:.c=.o}
 
 HEADER			= ../../includes
@@ -42,7 +39,7 @@ $(NAME):		${OBJS}
 
 %.o: %.c
 				@${CC} ${CFLAGS} -I ${HEADER} -o $@ -c $<
-				@echo "$(GREEN) [OK] : $(RESET) $<"
+				@echo "[OK] : $<"
 
 clean:
 				@${RM} ${OBJS}

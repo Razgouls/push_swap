@@ -71,9 +71,6 @@ SRCS_LIST	= 	ft_atoi.c \
 				ft_abs.c \
 				ft_rad_to_deg.c \
 
-GREEN   		= \e[32m
-RESET   		= \e[39m
-
 SRCS		= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 OBJS		= ${SRCS:.c=.o}
 
@@ -87,14 +84,14 @@ CFLAGS 		= -Wall -Wextra -Werror
 RM			= rm -f
 
 $(NAME):	${OBJS}
-			@echo "$(GREEN) -----> COMPILATION FT_PRINTF <----- $(RESET)"
+			@echo "-----> COMPILATION FT_PRINTF <-----"
 			@make -C $(FT_PRINTF)
 			@cp $(FT_PRINTF)/libftprintf.a ./$(NAME)
 			@ar -rcs ${NAME} ${OBJS}
 
 %.o: %.c
 			@${CC} -c ${CFLAGS} -o $@ $< -I ${HEADER}
-			@echo "$(GREEN) [OK] : $(RESET) $<"
+			@echo "[OK] : $<"
 
 all:		${NAME}
 

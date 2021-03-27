@@ -8,9 +8,7 @@ SRCS_LIST 		= checker/ft_checker.c				\
 					operandes/ft_operande_a.c		\
 					operandes/ft_operande_b.c		\
 					operandes/ft_operande_s.c		\
-
-GREEN   		= \e[32m
-RESET   		= \e[39m
+					push_swap/ft_insertion.c
 
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 
@@ -23,27 +21,26 @@ LIBFT 			= libft
 CC				= clang
 CFLAGS 			= -Wall -Wextra -Werror
 LFLAGS			= -L libft -lft
-MLX_DIR			= minilibx-linux
 
 RM				= rm -f
 
 all:			$(NAME)
 
 $(NAME):		$(OBJS)
-				@echo "$(GREEN) -----> COMPILATION LIBFT <----- $(RESET)"
+				@echo "-----> COMPILATION LIBFT <-----"
 				@make -C $(LIBFT)
 				@${CC} $(CFLAGS) $(LFLAGS) -o $(NAME) $(OBJS) libft/libft.a
 
 %.o: %.c
 				-@$(CC) $(CFLAGS) -I $(HEADER) -o $@ -c $<
-				@echo "$(GREEN) [OK] : $(RESET) $<"
+				@echo "[OK] : $<"
 
 clean:
-				@echo "$(GREEN) -----> CLEAR OK <----- $(RESET)"
+				@echo "-----> CLEAR OK <-----"
 				@$(RM) $(OBJS)
 
 fclean:			clean
-				@echo "$(GREEN) -----> COMPILATION FCLEAN OK <----- $(RESET)"
+				@echo "-----> COMPILATION FCLEAN OK <-----"
 				@$(RM) $(NAME)
 				@make fclean -C $(LIBFT)
 

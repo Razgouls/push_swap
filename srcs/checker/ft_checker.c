@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:14 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 18:24:00 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/26 16:23:37 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ int				main(int argc, char **argv)
 		ft_free_list(&d.a);
 		return (-1);
 	}
-	ft_loop(&d);
+	//ft_loop(&d);
+	ft_tri_insertion(&d);
 	ft_free_list(&d.a);
 	ft_free_list(&d.b);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:30 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 14:36:17 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/26 18:13:23 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 #include "../libft/includes/libft.h"
 
@@ -82,5 +83,11 @@ void			ft_rrb(t_data *d, int id, t_stack **s);
 void			ft_ss(t_data *d);
 void			ft_rr(t_data *d);
 void			ft_rrr(t_data *d);
+
+/*
+** PUSH_SWAP
+*/
+int			ft_tri_insertion(t_data *d);
+void		ft_random_nbr(t_data *d);
 
 #endif
