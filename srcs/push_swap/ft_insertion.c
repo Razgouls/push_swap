@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:19:46 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/27 09:36:15 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 06:59:00 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,39 @@ int				ft_get_nbr(t_stack *s, t_data *d, int id)
 	return (nbr);
 }
 
+int				ft_get_nbr_b(t_stack *s, t_data *d, int id)
+{
+	t_stack		*current;
+	int			nbr;
+
+	nbr = 0;
+	current = s;
+	nbr = current->nbr;
+	while (current)
+	{
+		if (id == 0)
+		{
+			if (current->nbr < nbr && ft_get_inside(current->nbr, d->a) == -1)
+				nbr = current->nbr;
+		}
+		else
+		{
+			if (current->nbr > nbr && ft_get_inside(current->nbr, d->a) == -1)
+				nbr = current->nbr;
+		}
+		current = current->next;
+	}
+	return (nbr);
+}
+
+int				ft_get_intervalle(t_stack *s, t_data *d, int n)
+{
+	int			max;
+	
+	max = ft_get_nbr(s, d, 1);
+	return ((max / 5) * n);
+}
+
 int				ft_get_place(t_stack *s, int nbr, int id)
 {
 	t_stack		*current;
@@ -72,40 +105,95 @@ int				ft_get_place(t_stack *s, int nbr, int id)
 	return (current->nbr);
 }
 
-void			ft_random_nbr(t_data *d)
+int				ft_get_best_place(t_stack *s, t_data *d, int n)
+{
+	t_stack		*current;
+	int			nbr;
+	int			place;
+	int			tmp_p;
+
+	nbr = 0;
+	current = s;
+	nbr = current->nbr;
+	place = -1;
+	while (current)
+	{
+		if (current->nbr >= n)
+		{
+			tmp_p = ft_get_place(s, current->nbr, 0);
+			if ((tmp_p < place && tmp_p < d->len_a - place) || place == -1)
+			{
+				place = tmp_p;
+			}
+		}
+		current = current->next;
+	}
+	return (place);
+}
+
+int				ft_get_best_place_b(t_stack *s, t_data *d, int n)
+{
+	t_stack		*current;
+	int			nbr;
+	int			place;
+	int			tmp_p;
+
+	nbr = 0;
+	current = s;
+	nbr = current->nbr;
+	place = -1;
+	while (current)
+	{
+		if (current->nbr >= n)
+		{
+			tmp_p = ft_get_place(s, current->nbr, 0);
+			if ((tmp_p < place && tmp_p < d->len_b - place) || place == -1)
+			{
+				place = tmp_p;
+			}
+		}
+		current = current->next;
+	}
+	return (place);
+}
+
+void			ft_random_nbr(t_data *d, int n, int max)
 {
 	int		cmp;
 	int		nbr;
 
 	cmp = 0;
-	srand(time(NULL));
-	while (cmp < 100)
+	struct timeval tpstart;
+	gettimeofday(&tpstart, NULL);
+	srand(tpstart.tv_usec); 
+	while (cmp < n)
 	{
-		nbr = rand() % 130 + 1;
+		nbr = 0;
+		nbr = rand() % max;
 		if (ft_get_inside(nbr, d->a) == -1)
 		{
 			ft_add_back_list(d, 0, &d->a, nbr);
 			cmp++;
 		}
 	}
-	ft_print_stack(d->a);
 }
 
-int				ft_tri_insertion(t_data *d)
+int				ft_tri_insertion(t_data *d, int max)
 {
 	int		place;
 	int		cmp;
 	int		res;
 	int		i;
+	int		nbr_max;
 
-	i = 1;
 	res = 0;
 	cmp = 0;
-	ft_random_nbr(d);
+	nbr_max = ft_get_nbr(d->a, d, 1) + 1;
 	while (d->a)
 	{
-		place = ft_get_place(d->a, ft_get_nbr(d->a, d, 0), 0);
-		printf("place : [ %d ]\n", place);
+		i = nbr_max;
+		while (d->a && (place = ft_get_best_place(d->a, d, i)) == -1)
+			i -= max;
 		if (place > d->len_a / 2)
 		{
 			while (place < d->len_a)
@@ -127,12 +215,45 @@ int				ft_tri_insertion(t_data *d)
 		ft_pb(d);
 		res++;
 	}
-	ft_print_stack(d->b);
-	printf("res : [ %d ]\n", res);
-	return (0);
+	return (res);
 }
 
-//1. no more than 2-3 operations for 3 integers
-//2. no more than 12 operations for 5 integers
-//3. no more than 700 operations for 100 integers
-//4. no more than 5300 operations for 500 integers
+int				ft_tri_insertion_b(t_data *d, int max)
+{
+	int		place;
+	int		cmp;
+	int		res;
+	int		i;
+	int		nbr_max;
+
+	res = 0;
+	cmp = 0;
+	nbr_max = ft_get_nbr_b(d->b, d, 1) + 1;
+	while (d->b)
+	{
+		i = nbr_max;
+		while (d->b && (place = ft_get_best_place_b(d->b, d, i)) == -1)
+			i -= max;
+		if (place > d->len_b / 2)
+		{
+			while (place < d->len_b)
+			{
+				ft_rrb(d, 1, &d->b);
+				res++;
+				place++;
+			}
+		}
+		else
+		{
+			while (place > 0)
+			{
+				ft_rb(d, 1, &d->b);
+				res++;
+				place--;
+			}
+		}
+		ft_pa(d);
+		res++;
+	}
+	return (res);
+}

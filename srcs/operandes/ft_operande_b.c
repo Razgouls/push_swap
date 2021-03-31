@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 08:38:08 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 14:25:39 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/30 14:57:16 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void			ft_sb(t_data *d)
 	tmp->prev->prev = tmp;
 	tmp->prev = NULL;
 	d->b = tmp;
+	//printf("sb\n");
 }
 
 void			ft_pb(t_data *d)
@@ -37,6 +38,7 @@ void			ft_pb(t_data *d)
 	tmp = d->b;
 	ft_add_front_list(d, 1, &d->b, d->a->nbr);
 	ft_delete_elem_first(d, &d->a, 0);
+	//printf("pb\n");
 }
 
 void			ft_rb(t_data *d, int id, t_stack **s)
@@ -51,12 +53,13 @@ void			ft_rb(t_data *d, int id, t_stack **s)
 	tmp = *s;
 	(*s)->next->prev = NULL;
 	current = *s;
+	*s = (*s)->next;
 	while (current->next)
 		current = current->next;
 	current->next = tmp;
-	*s = (*s)->next;
 	current->next->next = NULL;
 	current->next->prev = current;
+	//printf("rb\n");
 }
 
 void			ft_rrb(t_data *d, int id, t_stack **s)
@@ -77,4 +80,5 @@ void			ft_rrb(t_data *d, int id, t_stack **s)
 	current->next = tmp;
 	tmp->prev = current;
 	*s = current;
+	//printf("rrb\n");
 }

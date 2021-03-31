@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:03:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 14:35:28 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/30 19:40:41 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@ int				ft_size_list(t_stack *stack)
 		stack = stack->next;
 	}
 	return (cmp);
+}
+
+t_stack			*ft_get_last_list(t_stack *s)
+{
+	t_stack		*current;
+
+	current = s;
+	while (current->next)
+		current = current->next;
+	return (current);
 }
 
 void			ft_modif_elem(t_stack *cur, t_stack *next, t_stack *prev)
@@ -102,6 +112,33 @@ void			ft_add_back_list(t_data *d, int id, t_stack **s, int nbr)
 		current = current->next;
 	current->next = ft_new_elem(NULL, current, nbr);
 	ft_setup_len(d, id, '+');
+}
+
+void			ft_add_back_list_bis(t_stack **s, int nbr)
+{
+	t_stack		*current;
+
+	current = *s;
+	if (!current)
+	{
+		*s = ft_new_elem(NULL, NULL, nbr);
+		return ;
+	}
+	while (current->next)
+		current = current->next;
+	current->next = ft_new_elem(NULL, current, nbr);
+}
+
+void			ft_copy_list(t_stack **dest, t_stack *src)
+{
+	t_stack		*current;
+
+	current = src;
+	while (current)
+	{
+		ft_add_back_list_bis(dest, current->nbr);
+		current = current->next;
+	}
 }
 
 void			ft_delete_elem_first(t_data *d, t_stack **s, int id)

@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug.c                                         :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 19:29:38 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/27 19:39:41 by eoliveir         ###   ########.fr       */
+/*   Created: 2021/03/30 07:17:09 by eoliveir          #+#    #+#             */
+/*   Updated: 2021/03/30 08:23:31 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "libft.h"
 
-void			ft_print_stack(t_stack *s)
+int             ft_sqrt(int nb)
 {
-	while (s)
-	{
-		printf("[ %d ] ", s->nbr);
-		s = s->next;
-	}
-	printf("\n");
-}
+	int         j;
 
-void			ft_print_stack_inv(t_stack *s)
-{
-	while (s->next)
-		s = s->next;
-	while (s)
-	{
-		printf("[ %d ] ", s->nbr);
-		s = s->prev;
-	}
-	printf("\n");
+	j = 0;
+	if (nb < 1)
+		return (0);
+	while (j * j < nb && j <= 46340)
+		j++;
+	if (j * j == nb)
+		return (j);
+	else if (j * j > nb)
+		return (j - 1);
+	return (0);
 }

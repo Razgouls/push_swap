@@ -8,7 +8,13 @@ SRCS_LIST 		= checker/ft_checker.c				\
 					operandes/ft_operande_a.c		\
 					operandes/ft_operande_b.c		\
 					operandes/ft_operande_s.c		\
-					push_swap/ft_insertion.c
+					operandes/ft_operande_spec.c	\
+					push_swap/ft_insertion.c		\
+					push_swap/ft_radix_sort.c		\
+					push_swap/ft_small_len.c		\
+					push_swap/ft_med_len.c			\
+					push_swap/ft_new_algo.c			\
+					push_swap/ft_quick_sort.c		\
 
 SRCS			= $(addprefix ${FOLDER}/, ${SRCS_LIST})
 

@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "checker.h": "c"
+        "checker.h": "c",
+        "__tuple": "c",
+        "array": "c"
     }
 }

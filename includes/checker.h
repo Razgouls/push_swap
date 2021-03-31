@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:30 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/26 18:13:23 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/30 20:16:54 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <sys/time.h>
 
 #include "../libft/includes/libft.h"
 
@@ -41,6 +42,8 @@ typedef struct      s_data
 */
 void			ft_add_back_list(t_data *d, int id, t_stack **s, int nbr);
 int				ft_size_list(t_stack *stack);
+t_stack			*ft_get_last_list(t_stack *s);
+void			ft_copy_list(t_stack **dest, t_stack *src);
 void			ft_free_list(t_stack **s);
 int				ft_issorted(t_data *d, t_stack *a);
 void			ft_delete_elem_first(t_data *d, t_stack **s, int id);
@@ -54,6 +57,7 @@ void			ft_setup_len(t_data *d, int id, char op);
 
 void			ft_print_stack(t_stack *s);
 void			ft_print_stack_inv(t_stack *s);
+void			ft_print_infos(t_data *d);
 
 /*
 ** FILL_STACK
@@ -85,9 +89,40 @@ void			ft_rr(t_data *d);
 void			ft_rrr(t_data *d);
 
 /*
+** OPERANDE_SPEC
+*/
+void			ft_before_last(t_data *d);
+void			ft_third_pos(t_data *d);
+
+/*
 ** PUSH_SWAP
 */
-int			ft_tri_insertion(t_data *d);
-void		ft_random_nbr(t_data *d);
+int				ft_tri_insertion(t_data *d, int max);
+int				ft_tri_insertion_b(t_data *d, int max);
+void			ft_random_nbr(t_data *d, int n, int max);
+int				ft_get_nbr(t_stack *s, t_data *d, int id);
+int				ft_get_place(t_stack *s, int nbr, int id);
+
+/*
+** RADIX SORT
+*/
+int				ft_radix_sort(t_data *d);
+void			ft_radix_sort_bis(int i);
+
+/*
+** SORT
+*/
+int				ft_small_len(t_data *d, int *cmp);
+int				ft_small_len_a(t_data *d, int *cmp);
+int				ft_small_len_b(t_data *d, int *cmp);
+int				ft_small_len_b_bis(t_data *d, int *cmp);
+int				ft_med_len(t_data *d);
+
+/*
+** NEW_ALGO
+*/
+void			ft_tri_three_long(t_data *d, int *cmp);
+void			ft_divise_list(t_data *d, t_stack *s);
+int				ft_quick_sort(t_data *d);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: user42 <user42@student.42.fr>              +#+  +:+       +#+         #
+#    By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 09:04:13 by eoliveir          #+#    #+#              #
-#    Updated: 2021/02/01 14:12:39 by user42           ###   ########.fr        #
+#    Updated: 2021/03/30 07:18:30 by eoliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRCS_LIST	= 	ft_atoi.c \
 				ft_strtrim.c \
 				ft_split.c \
 				ft_split_multi.c \
+				ft_sqrt.c \
 				ft_itoa.c \
 				ft_strmapi.c \
 				ft_putchar_fd.c \

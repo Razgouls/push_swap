@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug.c                                         :+:      :+:    :+:   */
+/*   ft_operande_spec.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 19:29:38 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/27 19:39:41 by eoliveir         ###   ########.fr       */
+/*   Created: 2021/03/29 12:21:22 by eoliveir          #+#    #+#             */
+/*   Updated: 2021/03/29 12:23:25 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker.h"
 
-void			ft_print_stack(t_stack *s)
+void			ft_before_last(t_data *d)
 {
-	while (s)
-	{
-		printf("[ %d ] ", s->nbr);
-		s = s->next;
-	}
-	printf("\n");
+	ft_rra(d, 0, &d->a);
+	ft_pa(d);
+	ft_ra(d, 0, &d->a);
+	ft_ra(d, 0, &d->a);
 }
 
-void			ft_print_stack_inv(t_stack *s)
+void			ft_third_pos(t_data *d)
 {
-	while (s->next)
-		s = s->next;
-	while (s)
-	{
-		printf("[ %d ] ", s->nbr);
-		s = s->prev;
-	}
-	printf("\n");
+	ft_ra(d, 0, &d->a);
+	ft_pa(d);
+	ft_sa(d);
+	ft_rra(d, 0, &d->a);
 }
