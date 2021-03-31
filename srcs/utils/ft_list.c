@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:03:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/30 19:40:41 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 10:52:34 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				ft_issorted(t_data *d, t_stack *a)
 {
 	if (d->len_a < 2)
 		return (0);
-	while (a->next)
+	while (a && a->next)
 	{
 		if (a->nbr > a->next->nbr)
 			return (-1);
