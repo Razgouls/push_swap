@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:19:46 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 10:29:42 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 17:42:27 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,6 @@ int				ft_get_nbr_b(t_stack *s, t_data *d, int id)
 	return (nbr);
 }
 
-int				ft_get_intervalle(t_stack *s, t_data *d, int n)
-{
-	int			max;
-	
-	max = ft_get_nbr(s, d, 1);
-	return ((max / 5) * n);
-}
-
 int				ft_get_place(t_stack *s, int nbr, int id)
 {
 	t_stack		*current;
@@ -97,7 +89,7 @@ int				ft_get_place(t_stack *s, int nbr, int id)
 		if (current->nbr != nbr)
 			cmp++;
 		else
-			break;
+			break ;
 		current = current->next;
 	}
 	if (id == 0)
@@ -157,38 +149,13 @@ int				ft_get_best_place_b(t_stack *s, t_data *d, int n)
 	return (place);
 }
 
-void			ft_random_nbr(t_data *d, int n, int max)
-{
-	int		cmp;
-	int		nbr;
-	// (void)n;
-	// (void)max;
-	cmp = 0;	
-	struct timeval tpstart;
-	gettimeofday(&tpstart, NULL);
-	srand(tpstart.tv_usec); 
-	while (cmp < n)
-	{
-		nbr = 0;
-		nbr = rand() % max;
-		nbr -= (max / 2);
-		if (ft_get_inside(nbr, d->a) == -1)
-		{
-			ft_add_back_list(d, 0, &d->a, nbr);
-			cmp++;
-		}
-	}
-}
-
 int				ft_tri_insertion(t_data *d, int max)
 {
 	int		place;
-	int		cmp;
 	int		res;
 	int		i;
 
 	res = 0;
-	cmp = 0;
 	while (d->a)
 	{
 		i = ft_get_nbr(d->a, d, 1) + 1;
@@ -213,7 +180,7 @@ int				ft_tri_insertion(t_data *d, int max)
 			}
 		}
 		ft_pb(d);
-		ft_small_len_b_bis(d, &cmp);
+		ft_small_len_b_bis(d);
 		res++;
 	}
 	return (res);
@@ -222,12 +189,10 @@ int				ft_tri_insertion(t_data *d, int max)
 int				ft_tri_insertion_b(t_data *d, int max)
 {
 	int		place;
-	int		cmp;
 	int		res;
 	int		i;
 
 	res = 0;
-	cmp = 0;
 	while (d->b)
 	{
 		i = ft_get_nbr_b(d->b, d, 1) + 1;
@@ -252,7 +217,7 @@ int				ft_tri_insertion_b(t_data *d, int max)
 			}
 		}
 		ft_pa(d);
-		ft_small_len_a(d, &cmp);
+		ft_small_len_a(d);
 		res++;
 	}
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 08:38:04 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/30 14:58:58 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 17:42:54 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void			ft_sa(t_data *d)
 	tmp->prev->prev = tmp;
 	tmp->prev = NULL;
 	d->a = tmp;
-	//printf("sa\n");
+	if (d->input == 1)
+		printf("sa\n");
 }
 
 void			ft_pa(t_data *d)
@@ -38,7 +39,8 @@ void			ft_pa(t_data *d)
 	tmp = d->a;
 	ft_add_front_list(d, 0, &d->a, d->b->nbr);
 	ft_delete_elem_first(d, &d->b, 1);
-	//printf("pa\n");
+	if (d->input == 1)
+		printf("pa\n");
 }
 
 void			ft_ra(t_data *d, int id, t_stack **s)
@@ -59,7 +61,8 @@ void			ft_ra(t_data *d, int id, t_stack **s)
 	current->next = tmp;
 	current->next->next = NULL;
 	current->next->prev = current;
-	//printf("ra\n");
+	if (d->input == 1)
+		printf("ra\n");
 }
 
 void			ft_rra(t_data *d, int id, t_stack **s)
@@ -80,5 +83,6 @@ void			ft_rra(t_data *d, int id, t_stack **s)
 	current->next = tmp;
 	tmp->prev = current;
 	*s = current;
-	//printf("rra\n");
+	if (d->input == 1)
+		printf("rra\n");
 }

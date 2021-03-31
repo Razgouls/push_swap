@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:14 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 11:01:28 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 17:40:39 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void			ft_init_data(t_data *d)
 {
+	d->input = 0;
 	d->len_a = 0;
 	d->len_b = 0;
 	d->a = NULL;
@@ -73,61 +74,6 @@ int				ft_loop(t_data *d)
 	}
 }
 
-int				ft_call_fcnt(t_data *d)
-{
-	int			cmp;
-
-	cmp = 0;
-	if (ft_issorted(d, d->a) == -1)
-	{
-		if (d->len_a <= 3)
-			return (ft_small_len(d, &cmp));
-		else if (d->len_a == 4)
-			return (ft_tri_insertion(d, 20));
-		else if (d->len_a == 5)
-			return (ft_med_len(d, &cmp));
-		//else if (d->len_a <= 100)
-		//	ft_long_len(d);
-		//else
-		//	ft_very_long_len(d);
-	}
-	return (0);
-}
-
-void			ft_testeur(t_data *d, int n, int rep)
-{
-	int			i;
-	char		*buffer;
-	t_stack		*stack_tmp;
-	int			res;
-
-	i = 0;
-	stack_tmp = NULL;
-	(void)rep;
-	buffer = malloc(2048 * sizeof(char));
-	while (i < rep)
-	{
-		ft_init_data(d);
-		ft_random_nbr(d, n, n * 2);
-		ft_copy_list(&stack_tmp, d->a);
-		res = ft_call_fcnt(d);
-		if (res == -1 || res >= 1)
-		{
-			printf("------------------------INFOS------------------------\n");
-			ft_print_stack(stack_tmp);
-			ft_print_stack(d->a);
-			printf("coups : [ %d ]\n", res);
-			printf("[ KO ]\n");
-			printf("-----------------------------------------------------\n");
-		}
-		printf("res : [ %d ]\n", res);
-		ft_free_list(&d->a);
-		ft_free_list(&d->b);
-		ft_free_list(&stack_tmp);
-		i++;
-	}
-}
-
 void			ft_len_5(t_data *d, int *tmp_count, int j)
 {
 	(*tmp_count) += ft_tri_insertion(d, j);
@@ -139,11 +85,21 @@ void			ft_len_100(t_data *d, int *tmp_count, int j)
 	(*tmp_count) += ft_tri_insertion_b(d, 1);
 }
 
-void			ft_len_500(t_data *d, int *tmp_count)
+int				ft_call_fcnt(t_data *d, int j)
 {
-	(*tmp_count) += ft_tri_insertion(d, 250);
-	(*tmp_count) += ft_tri_insertion_b(d, 50);
-	(*tmp_count) += ft_tri_insertion(d, 1);
+	int			cmp;
+
+	cmp = 0;
+	if (ft_issorted(d, d->a) == -1)
+	{
+		if (d->len_a <= 3)
+			ft_small_len(d);
+		else if (d->len_a == 5)
+			ft_len_5(d, &cmp, j);
+		else
+			ft_len_100(d, &cmp, j);
+	}
+	return (0);
 }
 
 int				main(int argc, char **argv)
@@ -154,12 +110,6 @@ int				main(int argc, char **argv)
 	ret = 0;
 	(void)argv;
 	(void)argc;
-	//ft_testeur(&d, 4, 1);
-	//ft_random_nbr(&d, 100, 400);
-	//ft_print_stack(d.a);
-	//ft_quick_sort(&d);
-	//ft_divise_list(&d, d.a);
-	//ft_radix_sort(&d);
 	ft_init_data(&d);
 	if (argc < 2)
 		return (0);
@@ -169,91 +119,51 @@ int				main(int argc, char **argv)
 		ft_free_list(&d.a);
 		return (-1);
 	}
-	//ft_print_stack(d.a);
-	//ft_random_nbr(&d);
-	//ft_loop(&d);
-	//ft_tri_insertion(&d, 250);
-	int		count = 0;
+
+	int		count = 100000;
 	int		tmp_count = 0;
 
-	int	j = 0;
-	//int i = 0;
+	int	j = ft_get_nbr(d.a, &d, 0);
 	int save_i;
-	//ft_len_500(&d, &count, 250, 1);
-	//count += ft_tri_insertion(&d, i);
-	//count += ft_tri_insertion_b(&d, j);
+	
 	t_stack *tmp;
 
-	int n = 200;
-	int	res = 0;
+	int n = ft_get_nbr(d.a, &d, 1);
 	tmp = NULL;
+
 	ft_copy_list(&tmp, d.a);
-	//ft_free_list(&(d.a));
-	j = 0;
-	count = 10000;
+	if (j == -1)
+		j--;
 	while (++j < n)
 	{
 		tmp_count = 0;
-		ft_len_100(&d, &tmp_count, j);
+		if (j < 0)
+			ft_len_100(&d, &tmp_count, -j);
+		else
+			ft_len_100(&d, &tmp_count, j);
 		if (tmp_count < count)
 		{
 			save_i = j;
 			count = tmp_count;
 		}
-		if (j < n - 1)
-		{
-			ft_free_list(&d.a);
-			ft_free_list(&d.b);
-			ft_copy_list(&(d.a), tmp);
-		}
+		ft_free_list(&d.a);
+        ft_free_list(&d.b);
+    	ft_copy_list(&(d.a), tmp);
+		if (d.len_a > 50 && d.len_a < 500)
+			j += 4;
+		else if (d.len_a == 500)
+			j += 40;
 		else
-		{
-			ft_free_list(&d.a);
-			ft_free_list(&d.b);
-			ft_copy_list(&(d.a), tmp);
-			ft_len_100(&d, &tmp_count, save_i);
-			printf("count : [ %d ]\n", count);
-			res += count;
-		}
+			j += 1;
+		if (j == -1)
+			j++;
 	}
-	printf("moyenne : [ %d ]\n", res / 100);
-	//ft_random_nbr(&d, 500, 1000);
-	//ft_len_500(&d, &count);
-
-	// while (j < 5)
-	// {
-	// 	ft_random_nbr(&d, 5, 100);
-	// 	tmp_count += ft_tri_insertion(&d, j);
-	// 	tmp_count += ft_tri_insertion_b(&d, 1);
-	// 	printf("tmp_count : [ %d ]\n", tmp_count);
-	// 	if (ft_issorted(&d, d.a) == -1)
-	// 		printf("[ KO ]\n");
-	// 	else
-	// 		printf("[ OK ]\n");
-	// 	ft_free_list(&d.a);
-	// 	ft_free_list(&d.b);
-	// 	if (tmp_count < count)
-	// 	{
-	// 		save_i = i;
-	// 		count = tmp_count;
-	// 	}
-	// 	j++;
-	// 	tmp_count = 0;
-	// }
-
-	// count += ft_tri_insertion(&d, 50);
-	// count += ft_tri_insertion_b(&d, 1);
-	// ft_print_stack(d.b);
-	//printf("i : [ %d ]\n", j);
-	// if (ft_issorted(&d, d.a) == -1)
-	// 	printf("[ KO ]\n");
-	// else
-	// 	printf("[ OK ]\n");
-	//ft_print_stack(d.a);
-	//ft_call_fcnt(&d);
-	//ft_radix_sort(&d);
-	//ft_small_len(&d);
-	//ft_free_list(&d.a);
-	//ft_free_list(&d.b);
+	ft_free_list(&d.a);
+	ft_free_list(&d.b);
+	ft_copy_list(&(d.a), tmp);
+	d.input = 1;
+	if (save_i < 0)
+		save_i *= -1;
+	ft_call_fcnt(&d, save_i);
 	return (0);
 }

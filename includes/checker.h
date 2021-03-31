@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:30 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 08:14:08 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 18:03:47 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct      s_data
 	t_stack         *b;
 	int             len_a;
 	int             len_b;
+	int				input;
 }                   t_data;
 
 
@@ -89,12 +90,6 @@ void			ft_rr(t_data *d);
 void			ft_rrr(t_data *d);
 
 /*
-** OPERANDE_SPEC
-*/
-void			ft_before_last(t_data *d);
-void			ft_third_pos(t_data *d);
-
-/*
 ** PUSH_SWAP
 */
 int				ft_tri_insertion(t_data *d, int max);
@@ -104,19 +99,12 @@ int				ft_get_nbr(t_stack *s, t_data *d, int id);
 int				ft_get_place(t_stack *s, int nbr, int id);
 
 /*
-** RADIX SORT
-*/
-int				ft_radix_sort(t_data *d);
-void			ft_radix_sort_bis(int i);
-
-/*
 ** SORT
 */
-int				ft_small_len(t_data *d, int *cmp);
-int				ft_small_len_a(t_data *d, int *cmp);
-int				ft_small_len_b(t_data *d, int *cmp);
-int				ft_small_len_b_bis(t_data *d, int *cmp);
-int				ft_med_len(t_data *d, int *cmp);
+void			ft_small_len(t_data *d);
+void			ft_small_len_a(t_data *d);
+void			ft_small_len_b(t_data *d);
+void			ft_small_len_b_bis(t_data *d);
 
 /*
 ** NEW_ALGO
