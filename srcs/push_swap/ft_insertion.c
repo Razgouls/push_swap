@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:19:46 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 06:59:00 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 10:29:42 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,9 @@ void			ft_random_nbr(t_data *d, int n, int max)
 {
 	int		cmp;
 	int		nbr;
-
-	cmp = 0;
+	// (void)n;
+	// (void)max;
+	cmp = 0;	
 	struct timeval tpstart;
 	gettimeofday(&tpstart, NULL);
 	srand(tpstart.tv_usec); 
@@ -170,6 +171,7 @@ void			ft_random_nbr(t_data *d, int n, int max)
 	{
 		nbr = 0;
 		nbr = rand() % max;
+		nbr -= (max / 2);
 		if (ft_get_inside(nbr, d->a) == -1)
 		{
 			ft_add_back_list(d, 0, &d->a, nbr);
@@ -184,14 +186,12 @@ int				ft_tri_insertion(t_data *d, int max)
 	int		cmp;
 	int		res;
 	int		i;
-	int		nbr_max;
 
 	res = 0;
 	cmp = 0;
-	nbr_max = ft_get_nbr(d->a, d, 1) + 1;
 	while (d->a)
 	{
-		i = nbr_max;
+		i = ft_get_nbr(d->a, d, 1) + 1;
 		while (d->a && (place = ft_get_best_place(d->a, d, i)) == -1)
 			i -= max;
 		if (place > d->len_a / 2)
@@ -213,6 +213,7 @@ int				ft_tri_insertion(t_data *d, int max)
 			}
 		}
 		ft_pb(d);
+		ft_small_len_b_bis(d, &cmp);
 		res++;
 	}
 	return (res);
@@ -224,14 +225,12 @@ int				ft_tri_insertion_b(t_data *d, int max)
 	int		cmp;
 	int		res;
 	int		i;
-	int		nbr_max;
 
 	res = 0;
 	cmp = 0;
-	nbr_max = ft_get_nbr_b(d->b, d, 1) + 1;
 	while (d->b)
 	{
-		i = nbr_max;
+		i = ft_get_nbr_b(d->b, d, 1) + 1;
 		while (d->b && (place = ft_get_best_place_b(d->b, d, i)) == -1)
 			i -= max;
 		if (place > d->len_b / 2)
@@ -253,6 +252,7 @@ int				ft_tri_insertion_b(t_data *d, int max)
 			}
 		}
 		ft_pa(d);
+		ft_small_len_a(d, &cmp);
 		res++;
 	}
 	return (res);

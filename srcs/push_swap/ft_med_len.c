@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 07:37:22 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/29 12:26:55 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 08:13:52 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,17 @@ void			ft_max_below(t_data *d, int *cmp)
 	}
 }
 
-int				ft_med_len(t_data *d)
+int				ft_med_len(t_data *d, int *cmp)
 {
-	int			cmp;
-
-	cmp = 0;
 	if (d->len_a >= 5)
 	{
-		ft_max_below(d, &cmp);
+		ft_max_below(d, cmp);
 		ft_pb(d);
 		ft_pb(d);
-		cmp += 2;
-		ft_small_len_b(d, &cmp);
-		ft_small_len(d, &cmp);
-		ft_sort_elem_list(d, &cmp);
+		(*cmp) += 2;
+		ft_small_len_b(d, cmp);
+		ft_small_len(d, cmp);
+		ft_sort_elem_list(d, cmp);
 	}
-	if (cmp > 1)
-		return (cmp);
-	return (ft_issorted(d, d->a));
+	return (*cmp);
 }

@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:30 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/30 20:16:54 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 08:14:08 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int				ft_small_len(t_data *d, int *cmp);
 int				ft_small_len_a(t_data *d, int *cmp);
 int				ft_small_len_b(t_data *d, int *cmp);
 int				ft_small_len_b_bis(t_data *d, int *cmp);
-int				ft_med_len(t_data *d);
+int				ft_med_len(t_data *d, int *cmp);
 
 /*
 ** NEW_ALGO

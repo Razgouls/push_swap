@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:02 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/17 12:59:16 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/03/31 09:12:04 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			ft_fill_stack(char **argv, t_data *d)
 	while (argv[i])
 	{
 		nbr = ft_atoi(argv[i]);
-		if (nbr < 0 || (nbr == 0 && ft_strcmp(argv[i], "0")))
+		if (nbr == 0 && ft_strcmp(argv[i], "0"))
 			return (-1);
 		if (ft_isdoublon(nbr, a))
 			return (-1);
