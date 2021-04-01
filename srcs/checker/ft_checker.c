@@ -89,6 +89,7 @@ int				main(int argc, char **argv)
 	{
 		write(1, "Error\n", 6);
 		ft_free_list(&d.a);
+		ft_free_list(&d.b);
 		return (-1);
 	}
 	ft_loop(&d);

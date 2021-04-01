@@ -75,7 +75,7 @@ for ((testNB = 0; testNB < $TotalNbTest; testNB++)); do
 	fi
 	printf "${COLOR} $MOVES ${NOCOLOR} instructions\n"
 	TOTAL=$(( $TOTAL + $MOVES ))
-  done
+done
 MEAN=$(( $TOTAL / $TotalNbTest ))
 printf "\nMean: $MEAN for stack of size $stack_size \n\n" 
 

@@ -52,22 +52,19 @@ int				ft_fill_stack(char **argv, t_data *d)
 {
 	int		nbr;
 	int		i;
-	t_stack	*a;
 
 	i = 0;
-	a = NULL;
 	while (argv[i])
 	{
 		nbr = ft_atoi(argv[i]);
 		if (nbr == 0 && ft_strcmp(argv[i], "0"))
 			return (-1);
-		if (ft_isdoublon(nbr, a))
+		if (ft_isdoublon(nbr, d->a))
 			return (-1);
 		if (ft_is_not_integer(argv[i]) == -1)
 			return (-1);
-		ft_add_back_list(d, 0, &a, nbr);
+		ft_add_back_list(d, 0, &d->a, nbr);
 		i++;
 	}
-	d->a = a;
 	return (0);
 }
