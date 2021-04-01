@@ -6,7 +6,7 @@
 #    By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/31 18:07:16 by eoliveir          #+#    #+#              #
-#    Updated: 2021/04/01 10:02:41 by eoliveir         ###   ########.fr        #
+#    Updated: 2021/04/01 10:59:27 by eoliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -117,7 +117,7 @@ clean:
 fclean: clean
 	@make -s fclean -C ./libft
 	@echo
-	@rm -f $(NAME) $(NAME_BONUS)
+	@rm -f $(NAME) $(CHECKER_NAME) $(NAME_BONUS)
 	@echo "$(RED)$(NAME) removed$(RESET)"
 	@echo "------------------------------"
 
