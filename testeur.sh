@@ -17,44 +17,13 @@ WHITE='\033[1;37m'
 
 rm -f push_swap_result.txt
 
-digit='^[0-9]+$' 		#digit number
-range='^[0-9]+-[0-9]+$' #range type 
+TotalNbTest=$(($1 + 0))
+stack_size=$(($2 + 0))
 
-if [[ $1 =~ $range ]]; then
-	startRange=$(( ${2%-*} + 0))
-	endRange=$(( ${2##*-} + 0))
-elif [[ $1 =~ $digit ]]; then
-	startRange=$(( ${2%-*} + 0))
-	endRange=$(( ${2##*-} + 0))
-else
-	printf "${RED} error: %s must be a positive number or range\n${NOCOLOR}" "$1">&2
-	exit -1
-fi
-
-if ! [[ $2 =~ $digit ]]; then
-	printf "${RED}error: %s must be a positive number\n${NOCOLOR}" "$2" >&2
-	exit -1;
-fi
-
-TotalNbTest=$(($2 + 0))
-
-if [[ $TotalNbTest -lt 1 ]]; then
-	printf "${RED}error: %s must be a positive number\n${NOCOLOR}" "$2" >&2
-	exit -1;
-fi 
-
-if (( $endRange < $startRange )); then
-	printf "${RED}error: invalid range\n${NOCOLOR}" >&2
-	exit -1
-fi
-
-printf "${GREEN}Testing push_swap with $TotalNbTest tests from $startRange to $endRange \n\n${NOCOLOR}" >&2
-for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
-	TOTAL=0
-	printf "${PURPLE} Generating random numbers for stack_size $stack_size...\n\n${NOCOLOR}"
-  for ((testNB = 0; testNB < $TotalNbTest; testNB++)); do
+printf "${GREEN}Generation de $TotalNbTest tests pour liste de $stack_size nombres\n\n${NOCOLOR}" >&2
+for ((testNB = 0; testNB < $TotalNbTest; testNB++)); do
   	printf "${DARKGRAY} TEST $testNB: ${NOCOLOR}"
-	ARG=`./genstack.pl $stack_size -1000 1000` ;
+	ARG=`./genstack.pl $stack_size -500 500` ;
 	"./push_swap" $ARG > push_swap_result.txt ;
 	RESULT_CHECKER=`"./checker" $ARG < push_swap_result.txt`
 	if [[ "$RESULT_CHECKER" = "KO" ]]; then
@@ -74,31 +43,31 @@ for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
 			COLOR=${WHITE}
 		elif (( $MOVES == 8 )); then
 			COLOR=${BLUE}
-		elif (( $MOVES < 12 )); then
+		elif (( $MOVES <= 12 )); then
 			COLOR=${GREEN}
 		else
 			COLOR=${RED}
 		fi
 	elif (( $stack_size <= 100 )) ; then
-		if (( $MOVES < 700 )); then
+		if (( $MOVES <= 700 )); then
 			COLOR=${WHITE}
-		elif (( $MOVES < 900 )); then
+		elif (( $MOVES <= 900 )); then
 			COLOR=${BLUE}
-		elif (( $MOVES < 1100 )); then
+		elif (( $MOVES <= 1100 )); then
 			COLOR=${GREEN}
-		elif (( $MOVES < 1500 )); then
+		elif (( $MOVES <= 1500 )); then
 			COLOR=${ORANGE}
 		else
 			COLOR=${RED}
 		fi
 	elif (( $stack_size <= 500 )) ; then
-		if (( $MOVES < 5500 )); then
+		if (( $MOVES <= 5500 )); then
 			COLOR=${WHITE}
-		elif (( $MOVES < 7000 )); then
+		elif (( $MOVES <= 7000 )); then
 			COLOR=${BLUE}
-		elif (( $MOVES < 8500 )); then
+		elif (( $MOVES <= 8500 )); then
 			COLOR=${GREEN}
-		elif (( $MOVES < 11500 )); then
+		elif (( $MOVES <= 11500 )); then
 			COLOR=${ORANGE}
 		else
 			COLOR=${RED}
@@ -107,8 +76,7 @@ for ((stack_size = $startRange; stack_size <= $endRange; stack_size++)); do
 	printf "${COLOR} $MOVES ${NOCOLOR} instructions\n"
 	TOTAL=$(( $TOTAL + $MOVES ))
   done
-  MEAN=$(( $TOTAL / $TotalNbTest ))
-  printf "\nMean: $MEAN for stack of size $stack_size \n\n"
-done 
+MEAN=$(( $TOTAL / $TotalNbTest ))
+printf "\nMean: $MEAN for stack of size $stack_size \n\n" 
 
 rm -rf push_swap_result.txt

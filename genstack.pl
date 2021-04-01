@@ -11,7 +11,7 @@ if ($stacksize < 0 || $min >= $max)
 
 for ($num = 0; $num < $stacksize; )
 {
-	$n = int(srand() % ($max- $min) + $min);
+	$n = int(srand() % ($max - $min) + $min);
 	if (!(grep { $_ eq $n } @stack))
 	{
 		push @stack, $n;
