@@ -6,11 +6,12 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 07:28:08 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 07:58:02 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 09:45:12 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
+#include "../../includes/push_swap.h"
 
 void			ft_len_5(t_data *d, int *tmp_count, int j)
 {
@@ -80,4 +81,5 @@ void			ft_get_solut(t_data *d)
 	if (save_i < 0)
 		save_i *= -1;
 	ft_call_fcnt(d, save_i);
+	ft_free_list(&tmp);
 }

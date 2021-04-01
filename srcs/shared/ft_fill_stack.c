@@ -6,11 +6,20 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:02 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 17:41:07 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 10:07:04 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
+
+void			ft_init_data(t_data *d)
+{
+	d->input = 0;
+	d->len_a = 0;
+	d->len_b = 0;
+	d->a = NULL;
+	d->b = NULL;
+}
 
 int			ft_is_not_integer(char *str)
 {

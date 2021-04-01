@@ -6,7 +6,7 @@
 #    By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/31 18:07:16 by eoliveir          #+#    #+#              #
-#    Updated: 2021/04/01 07:57:47 by eoliveir         ###   ########.fr        #
+#    Updated: 2021/04/01 10:02:41 by eoliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,35 +35,36 @@ INC= -I./includes
 
 SRC = srcs
 
-DIR_C = $(addprefix $(SRC)/, checker operandes push_swap utils)
+DIR_C = $(addprefix $(SRC)/, checker operandes push_swap shared)
 
-FILES_C = $(addprefix $(SRC)/, $(CHECKER) $(PUSH_SWAP) $(OPERANDES) $(UTILS))
+FILES_C = $(addprefix $(SRC)/, $(SHARED) $(OPERANDES) $(PUSH_SWAP))
 
-FILES_CHECKER = $(addprefix $(SRC)/, $(CHECKER) $(PUSH_SWAP) $(OPERANDES) $(UTILS))
+FILES_CHECKER = $(addprefix $(SRC)/, $(SHARED) $(OPERANDES) $(CHECKER))
+
+SHARED		= $(addprefix shared/,			\
+			ft_fill_stack.c					\
+			ft_list.c						\
+			ft_list_bis.c					\
+			ft_utils.c						\
+			)	
 
 CHECKER		= $(addprefix checker/,			\
 			ft_checker.c					\
-			ft_fill_stack.c					\
 			)
 
-PUSH_SWAP	= $(addprefix push_swap/,		\
-			ft_insertion.c					\
-			ft_small_len.c					\
-			ft_sort.c						\
-			ft_utils_push_swap.c			\
-			)
-			
 OPERANDES	= $(addprefix operandes/,		\
 			ft_operande_a.c					\
 			ft_operande_b.c					\
 			ft_operande_s.c					\
 			)
-UTILS		= $(addprefix utils/,			\
-			ft_debug.c						\
-			ft_list.c						\
-			ft_list_bis.c					\
-			ft_utils.c						\
-			)	
+
+PUSH_SWAP	= $(addprefix push_swap/,		\
+			ft_push_swap.c					\
+			ft_insertion.c					\
+			ft_small_len.c					\
+			ft_sort.c						\
+			ft_utils_push_swap.c			\
+			)
 
 #############################################
 ######			FILES .O			#########

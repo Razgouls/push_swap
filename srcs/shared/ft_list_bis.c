@@ -6,11 +6,11 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 07:08:32 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 07:13:12 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 10:07:07 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
 
 void			ft_add_front_list(t_data *d, int id, t_stack **s, int nbr)
 {

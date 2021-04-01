@@ -6,11 +6,11 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:03:33 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 07:32:14 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 10:07:10 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
 
 void			ft_free_list(t_stack **s)
 {

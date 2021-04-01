@@ -6,11 +6,12 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/29 06:52:38 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 17:37:44 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 09:44:01 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
+#include "../../includes/push_swap.h"
 
 void			ft_small_len(t_data *d)
 {

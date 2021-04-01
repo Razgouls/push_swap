@@ -39,7 +39,7 @@ test()
 	ts=$(date +%s%N)
 	SECOND=0
 	#v=$(./push_swap -r $1 | wc -l)
-	v=$(./checker $(./genstack.pl $1 -1000 1000) | wc -l)
+	v=$(./push_swap $(./genstack.pl $1 -1000 1000) | wc -l)
 	((TOTALSCORE+=$v))
 	if (( $v > $limit ))
 	then

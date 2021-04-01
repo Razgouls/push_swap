@@ -6,20 +6,11 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:14 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 07:32:07 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 10:09:18 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/checker.h"
-
-void			ft_init_data(t_data *d)
-{
-	d->input = 0;
-	d->len_a = 0;
-	d->len_b = 0;
-	d->a = NULL;
-	d->b = NULL;
-}
 
 void			ft_parser(t_data *d, char *line)
 {
@@ -68,27 +59,9 @@ int				ft_loop(t_data *d)
 		else if (ret == 1 && line[0])
 		{
 			ft_parser(d, line);
-			ft_print_stack(d->a);
 			ft_memdel(line);
 		}
 	}
-}
-
-int				ft_call_fcnt(t_data *d, int j)
-{
-	int			cmp;
-
-	cmp = 0;
-	if (ft_issorted(d, d->a) == -1)
-	{
-		if (d->len_a <= 3)
-			ft_small_len(d);
-		else if (d->len_a == 5)
-			ft_len_5(d, &cmp, j);
-		else
-			ft_len_100(d, &cmp, j);
-	}
-	return (0);
 }
 
 int				main(int argc, char **argv)
@@ -108,6 +81,8 @@ int				main(int argc, char **argv)
 		ft_free_list(&d.a);
 		return (-1);
 	}
-	ft_get_solut(&d);
+	ft_loop(&d);
+	ft_free_list(&d.a);
+	ft_free_list(&d.b);
 	return (0);
 }

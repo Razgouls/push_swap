@@ -6,11 +6,12 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 16:19:46 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 07:53:32 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 09:43:56 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
+#include "../../includes/push_swap.h"
 
 int				ft_rotate_list(t_data *d, int id, int len, int place)
 {

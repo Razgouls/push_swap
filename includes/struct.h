@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_debug.c                                         :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/16 19:29:38 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 17:41:15 by eoliveir         ###   ########.fr       */
+/*   Created: 2021/04/01 09:59:36 by eoliveir          #+#    #+#             */
+/*   Updated: 2021/04/01 10:00:11 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#ifndef STRUCT_H
+# define STRUCT_H
 
-void			ft_print_stack(t_stack *s)
+typedef struct		s_stack
 {
-	while (s)
-	{
-		printf("[ %d ] ", s->nbr);
-		s = s->next;
-	}
-	printf("\n");
-}
+	int				nbr;
+	struct s_stack	*prev;
+	struct s_stack	*next;
+}					t_stack;
 
-void			ft_print_stack_inv(t_stack *s)
+typedef struct		s_data
 {
-	while (s->next)
-		s = s->next;
-	while (s)
-	{
-		printf("[ %d ] ", s->nbr);
-		s = s->prev;
-	}
-	printf("\n");
-}
+	t_stack			*a;
+	t_stack			*b;
+	int				len_a;
+	int				len_b;
+	int				input;
+}					t_data;
+
+#endif

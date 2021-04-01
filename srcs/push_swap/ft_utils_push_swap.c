@@ -6,11 +6,12 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 07:53:03 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 07:57:57 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 09:44:43 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/checker.h"
+#include "../../includes/shared.h"
+#include "../../includes/push_swap.h"
 
 int				ft_get_inside(int nbr, t_stack *s)
 {
