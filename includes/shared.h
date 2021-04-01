@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 08:50:19 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 11:02:42 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 11:07:37 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void				ft_delete_elem_first(t_data *d, t_stack **s, int id);
 void				ft_setup_len(t_data *d, int id, char op);
 void				ft_memdel(void *ptr);
 int					ft_check_number(char *str);
+int					ft_check_number_neg(char *str);
 void				ft_print_stack(t_stack *s);
 
 #endif

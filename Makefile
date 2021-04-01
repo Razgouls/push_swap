@@ -6,7 +6,7 @@
 #    By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/31 18:07:16 by eoliveir          #+#    #+#              #
-#    Updated: 2021/04/01 11:00:09 by eoliveir         ###   ########.fr        #
+#    Updated: 2021/04/01 11:08:05 by eoliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -94,7 +94,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	-@$(CC) $(FLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME) -ltermcap
 	@echo "\n$(GREEN)-->[OK]$(RESET)"
 
-$(CHECKER_NAME): $(CHECKER_OBJS)
+$(CHECKER_NAME): $(LIBFT) $(CHECKER_OBJS)
 	@printf "$(YELLOW)Compiling Object...$(RESET)                                                       "
 	@printf "\n$(GREEN)-->[OK]                       $(RESET)"
 	@printf "\n$(CYAN)Compiling $@..."

@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:02 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 11:00:46 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 11:16:54 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,12 @@ int				ft_is_not_integer(char *str)
 	len = ft_strlen(str);
 	if (len < 10)
 		return (0);
-	if (len > 10)
+	if (len > 11)
 		return (-1);
-	if (ft_check_number(str) == -1)
-		return (-1);
+	if (len == 10)
+		return (ft_check_number(str));
+	if (len == 11)
+		return (ft_check_number_neg(str));
 	return (0);
 }
 
