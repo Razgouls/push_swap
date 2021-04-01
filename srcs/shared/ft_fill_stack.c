@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 19:15:02 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/04/01 10:07:04 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 11:00:46 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			ft_init_data(t_data *d)
 	d->b = NULL;
 }
 
-int			ft_is_not_integer(char *str)
+int				ft_is_not_integer(char *str)
 {
 	int		len;
 
@@ -35,7 +35,7 @@ int			ft_is_not_integer(char *str)
 	return (0);
 }
 
-int			ft_isdoublon(int nbr, t_stack *s)
+int				ft_isdoublon(int nbr, t_stack *s)
 {
 	while (s)
 	{
@@ -46,7 +46,7 @@ int			ft_isdoublon(int nbr, t_stack *s)
 	return (0);
 }
 
-int			ft_fill_stack(char **argv, t_data *d)
+int				ft_fill_stack(char **argv, t_data *d)
 {
 	int		nbr;
 	int		i;
