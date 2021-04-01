@@ -6,7 +6,7 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 18:58:14 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/31 17:40:39 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 07:32:07 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,6 @@ int				ft_loop(t_data *d)
 	}
 }
 
-void			ft_len_5(t_data *d, int *tmp_count, int j)
-{
-	(*tmp_count) += ft_tri_insertion(d, j);
-}
-
-void			ft_len_100(t_data *d, int *tmp_count, int j)
-{
-	(*tmp_count) += ft_tri_insertion(d, j);
-	(*tmp_count) += ft_tri_insertion_b(d, 1);
-}
-
 int				ft_call_fcnt(t_data *d, int j)
 {
 	int			cmp;
@@ -119,51 +108,6 @@ int				main(int argc, char **argv)
 		ft_free_list(&d.a);
 		return (-1);
 	}
-
-	int		count = 100000;
-	int		tmp_count = 0;
-
-	int	j = ft_get_nbr(d.a, &d, 0);
-	int save_i;
-	
-	t_stack *tmp;
-
-	int n = ft_get_nbr(d.a, &d, 1);
-	tmp = NULL;
-
-	ft_copy_list(&tmp, d.a);
-	if (j == -1)
-		j--;
-	while (++j < n)
-	{
-		tmp_count = 0;
-		if (j < 0)
-			ft_len_100(&d, &tmp_count, -j);
-		else
-			ft_len_100(&d, &tmp_count, j);
-		if (tmp_count < count)
-		{
-			save_i = j;
-			count = tmp_count;
-		}
-		ft_free_list(&d.a);
-        ft_free_list(&d.b);
-    	ft_copy_list(&(d.a), tmp);
-		if (d.len_a > 50 && d.len_a < 500)
-			j += 4;
-		else if (d.len_a == 500)
-			j += 40;
-		else
-			j += 1;
-		if (j == -1)
-			j++;
-	}
-	ft_free_list(&d.a);
-	ft_free_list(&d.b);
-	ft_copy_list(&(d.a), tmp);
-	d.input = 1;
-	if (save_i < 0)
-		save_i *= -1;
-	ft_call_fcnt(&d, save_i);
+	ft_get_solut(&d);
 	return (0);
 }

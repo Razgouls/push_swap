@@ -6,15 +6,15 @@
 /*   By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 07:17:09 by eoliveir          #+#    #+#             */
-/*   Updated: 2021/03/30 08:23:31 by eoliveir         ###   ########.fr       */
+/*   Updated: 2021/04/01 08:09:42 by eoliveir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int             ft_sqrt(int nb)
+int				ft_sqrt(int nb)
 {
-	int         j;
+	int			j;
 
 	j = 0;
 	if (nb < 1)

@@ -6,7 +6,7 @@
 #    By: eoliveir <elie.oliveir@gmail.com>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/31 18:07:16 by eoliveir          #+#    #+#              #
-#    Updated: 2021/03/31 18:15:29 by eoliveir         ###   ########.fr        #
+#    Updated: 2021/04/01 07:57:47 by eoliveir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ CHECKER		= $(addprefix checker/,			\
 PUSH_SWAP	= $(addprefix push_swap/,		\
 			ft_insertion.c					\
 			ft_small_len.c					\
+			ft_sort.c						\
+			ft_utils_push_swap.c			\
 			)
 			
 OPERANDES	= $(addprefix operandes/,		\
@@ -56,9 +58,10 @@ OPERANDES	= $(addprefix operandes/,		\
 			ft_operande_b.c					\
 			ft_operande_s.c					\
 			)
-UTILS		= $(addprefix utils/,		\
+UTILS		= $(addprefix utils/,			\
 			ft_debug.c						\
 			ft_list.c						\
+			ft_list_bis.c					\
 			ft_utils.c						\
 			)	
 
